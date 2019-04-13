@@ -5,6 +5,7 @@
  */
 package graphtool;
 
+import java.util.Objects;
 import javafx.beans.binding.DoubleBinding;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -18,8 +19,9 @@ import javafx.scene.shape.Line;
 public class Edge {
     private Vertex source;
     private Vertex dest;
-    private StackPane weight;
+    private StackPane weightPane;
     private Line line;
+    private int weight;
     
     public Edge(Vertex s, Vertex d){
         this.source = s;
@@ -71,17 +73,18 @@ public class Edge {
                                   );
         
         double size = 20;
+        this.weight = Integer.parseInt(w);
         Label cost = new Label(w);
         cost.setTextFill(Color.WHITE);
-        this.weight = new StackPane();
-        this.weight.setStyle("-fx-background-color:grey;-fx-border-width:1px;-fx-border-color:black;");
-        this.weight.setPrefSize(size, size);
-        this.weight.setMaxSize(size, size);
-        this.weight.setMinSize(size, size);
-        this.weight.getChildren().add(cost);
+        this.weightPane = new StackPane();
+        this.weightPane.setStyle("-fx-background-color:grey;-fx-border-width:1px;-fx-border-color:black;");
+        this.weightPane.setPrefSize(size, size);
+        this.weightPane.setMaxSize(size, size);
+        this.weightPane.setMinSize(size, size);
+        this.weightPane.getChildren().add(cost);
         
-        DoubleBinding wgtSqrHalfWidth = this.weight.widthProperty().divide(2.0);
-        DoubleBinding wgtSqrHalfHeight = this.weight.heightProperty().divide(2.0);
+        DoubleBinding wgtSqrHalfWidth = this.weightPane.widthProperty().divide(2.0);
+        DoubleBinding wgtSqrHalfHeight = this.weightPane.heightProperty().divide(2.0);
         DoubleBinding lineXHalfLength = this.line.endXProperty()
                                             .subtract(this.line.startXProperty())
                                             .divide(2.0);
@@ -89,8 +92,8 @@ public class Edge {
                                             .subtract(this.line.startYProperty())
                                             .divide(2.0);
         
-        weight.translateXProperty().bind(line.startXProperty().add(lineXHalfLength.subtract(wgtSqrHalfWidth)));
-        weight.translateYProperty().bind(line.startYProperty().add(lineYHalfLength.subtract(wgtSqrHalfHeight)));
+        weightPane.translateXProperty().bind(line.startXProperty().add(lineXHalfLength.subtract(wgtSqrHalfWidth)));
+        weightPane.translateYProperty().bind(line.startYProperty().add(lineYHalfLength.subtract(wgtSqrHalfHeight)));
     }
 
     public Vertex getSource() {
@@ -105,9 +108,43 @@ public class Edge {
         return line;
     }
 
-    public StackPane getWeight() {
+    public StackPane getWeightPane() {
+        return weightPane;
+    }
+    
+    public int getWeight(){
         return weight;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.source);
+        hash = 67 * hash + Objects.hashCode(this.dest);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Edge other = (Edge) obj;
+        if (!Objects.equals(this.source, other.source)) {
+            return false;
+        }
+        if (!Objects.equals(this.dest, other.dest)) {
+            return false;
+        }
+        return true;
+    }
+
     
     
 }

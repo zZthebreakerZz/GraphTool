@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import com.jfoenix.controls.*?>
@@ -13,7 +14,7 @@
    <top>
       <FlowPane alignment="TOP_CENTER" prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="btnCreate" buttonType="RAISED" layoutX="279.0" layoutY="15.0" ripplerFill="BLACK" styleClass="btnMenu" text="Create">
+            <JFXButton id="btnAdd" fx:id="btnAdd" buttonType="RAISED" layoutX="279.0" layoutY="10.0" onAction="#addHandle" styleClass="btnMenu" text="Add">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </FlowPane.margin>
@@ -21,7 +22,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </JFXButton>
-            <JFXButton id="btnAdd" fx:id="btnAdd" buttonType="RAISED" layoutX="279.0" layoutY="10.0" onAction="#addHandle" styleClass="btnMenu" text="Add">
+            <JFXButton fx:id="btnConnect" buttonType="RAISED" layoutX="310.0" layoutY="10.0" onAction="#connectHandle" styleClass="btnMenu" text="Connect">
                <FlowPane.margin>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                </FlowPane.margin>
@@ -37,14 +38,19 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </JFXButton>
-            <JFXButton fx:id="btnDrag" buttonType="RAISED" layoutX="310.0" layoutY="10.0" onAction="#dragHandle" styleClass="btnMenu" text="Drag">
-               <FlowPane.margin>
-                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-               </FlowPane.margin>
+            <JFXButton fx:id="btnDrag" buttonType="RAISED" layoutX="421.0" layoutY="15.0" onAction="#dragHandle" styleClass="btnMenu" text="Drag">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </FlowPane.margin>
             </JFXButton>
+            <JFXComboBox fx:id="cbxAlgorithm" onAction="#optAlgorithm">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </FlowPane.margin>
+            </JFXComboBox>
          </children>
          <BorderPane.margin>
             <Insets />
